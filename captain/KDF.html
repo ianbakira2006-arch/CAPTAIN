@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDF Recruitment Guidance Portal</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --kdf-green: #2E4732;
+            --kdf-gold: #C5A059;
+            --light-bg: #f4f4f4;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light-bg); color: #333; }
+        header { background: var(--kdf-green); color: white; padding: 1rem; text-align: center; border-bottom: 4px solid var(--kdf-gold); }
+        nav { background: #1b2b1e; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: var(--kdf-green); border-bottom: 2px solid var(--kdf-gold); padding-bottom: 10px; }
+        
+        /* Tool Styling */
+        .tool-box { background: #eef2ef; padding: 20px; border-radius: 8px; border-left: 5px solid var(--kdf-green); }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: var(--kdf-green); color: white; border: none; cursor: pointer; font-size: 16px; }
+        button:hover { background: #1b2b1e; }
+        #result { font-weight: bold; margin-top: 10px; padding: 10px; display: none; }
+        
+        .disclaimer { font-size: 12px; color: #666; text-align: center; margin-top: 50px; padding: 20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>KDF Recruitment Guide</h1>
+    <p>Your Unofficial Prep Portal</p>
+</header>
+
+<nav>
+    <a href="#checker">Eligibility</a>
+    <a href="#documents">Checklist</a>
+    <a href="#tips">Training Tips</a>
+</nav>
+
+<div class="container" id="checker">
+    <h2>Step 1: Quick Eligibility Checker</h2>
+    <div class="tool-box">
+        <label>Enter Your Age:</label>
+        <input type="number" id="age" placeholder="e.g. 21">
+        
+        <label>Gender:</label>
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label>Height (cm):</label>
+        <input type="number" id="height" placeholder="e.g. 170">
+
+        <button onclick="checkEligibility()">Check My Status</button>
+        <div id="result"></div>
+    </div>
+</div>
+
+<div class="container" id="documents">
+    <h2>Step 2: Document Checklist</h2>
+    <p>Ensure you have the following originals ready:</p>
+    <ul>
+        <li><input type="checkbox"> National ID Card</li>
+        <li><input type="checkbox"> KCSE Result Slip/Certificate</li>
+        <li><input type="checkbox"> Birth Certificate</li>
+        <li><input type="checkbox"> Police Clearance (Good Conduct)</li>
+    </ul>
+</div>
+
+<div class="disclaimer">
+    <strong>DISCLAIMER:</strong> This is a private guidance portal. We are NOT the Kenya Defence Forces. 
+    Always visit <a href="https://www.mod.go.ke">mod.go.ke</a> for official information.
+</div>
+
+<script>
+    // Logic for Eligibility Checker
+    function checkEligibility() {
+        const age = document.getElementById('age').value;
+        const height = document.getElementById('height').value;
+        const gender = document.getElementById('gender').value;
+        const resultDiv = document.getElementById('result');
+        
+        let message = "";
+        let isEligible = true;
+
+        if (age < 18 || age > 26) {
+            message += "• Age must be between 18 and 26. <br>";
+            isEligible = false;
+        }
+
+        if (gender === "male" && height < 160) {
+            message += "• Minimum height for men is roughly 160cm (5'3\"). <br>";
+            isEligible = false;
+        } else if (gender === "female" && height < 152) {
+            message += "• Minimum height for women is roughly 152cm (5'0\"). <br>";
+            isEligible = false;
+        }
+
+        resultDiv.style.display = "block";
+        if (isEligible) {
+            resultDiv.innerHTML = "✅ You meet the basic physical criteria! Prepare your documents.";
+            resultDiv.style.color = "green";
+        } else {
+            resultDiv.innerHTML = "⚠️ Points to check: <br>" + message;
+            resultDiv.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
